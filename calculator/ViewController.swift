@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
@@ -16,14 +17,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var in_price: UILabel!
     @IBOutlet weak var out_note: UILabel!
     @IBOutlet weak var out_price: UILabel!
-    
-    //フラグ
+ 
+    // Realmインスタンスを取得する
+    let realm = try! Realm()
+    //フラグなど
     var onOff : Bool = true
+    var total : Int = 0
+    var task:Task!
     
     //操作ボタン
     @IBAction func btn_back(sender: AnyObject) {
     }
     @IBAction func btn_entry(sender: AnyObject) {
+        tableView.reloadData()
     }
     @IBAction func btn_AC(sender: AnyObject) {
     }
@@ -34,24 +40,84 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //数字ボタン
     @IBAction func btn_0(sender: AnyObject) {
+        if total == 0 {
+            total = 0
+        } else {
+            total = (total * 10)
+        }
+        print(total)
     }
     @IBAction func btn_1(sender: AnyObject) {
+        if total == 0 {
+            total = 1
+        } else {
+            total = (total * 10) + 1
+        }
+        print(total)
     }
     @IBAction func btn_2(sender: AnyObject) {
+        if total == 0 {
+            total = 2
+        } else {
+            total = (total * 10) + 2
+        }
+        print(total)
     }
     @IBAction func btn_3(sender: AnyObject) {
+        if total == 0 {
+            total = 3
+        } else {
+            total = (total * 10) + 3
+        }
+        print(total)
     }
     @IBAction func btn_4(sender: AnyObject) {
+        if total == 0 {
+            total = 4
+        } else {
+            total = (total * 10) + 4
+        }
+        print(total)
     }
     @IBAction func btn_5(sender: AnyObject) {
+        if total == 0 {
+            total = 5
+        } else {
+            total = (total * 10) + 5
+        }
+        print(total)
     }
     @IBAction func btn_6(sender: AnyObject) {
+        if total == 0 {
+            total = 6
+        } else {
+            total = (total * 10) + 6
+        }
+        print(total)
     }
     @IBAction func btn_7(sender: AnyObject) {
+        if total == 0 {
+            total = 7
+        } else {
+            total = (total * 10) + 7
+        }
+        print(total)
     }
     @IBAction func btn_8(sender: AnyObject) {
+        if total == 0 {
+            total = 8
+        } else {
+            total = (total * 10) + 8
+        }
+        print(total)
     }
     @IBAction func btn_9(sender: AnyObject) {
+        if total == 0 {
+            total = 9
+        } else {
+            total = (total * 10) + 9
+        }
+        print(total)
     }
     
     
@@ -102,6 +168,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
     
-
+    func dismissKeyboard(){
+        // キーボードを閉じる
+        view.endEditing(true)
+    }
+    
+    
 }
 

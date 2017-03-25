@@ -84,7 +84,7 @@
                                                 <color key="backgroundColor" red="1" green="0.84599907809999997" blue="0.88667281119999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="⇦"/>
                                                 <connections>
-                                                    <action selector="btn_back:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6TC-0A-fme"/>
+                                                    <action selector="btn_back:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CSx-S1-Oy1"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G8y-Lg-Rzs">
@@ -296,13 +296,13 @@
                                         <rect key="frame" x="0.0" y="456" width="320" height="114"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tfb-u3-ih5">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucd-JU-Kbi">
-                                                <rect key="frame" x="0.0" y="94" width="320" height="21"/>
+                                                <rect key="frame" x="0.0" y="21" width="320" height="94"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
