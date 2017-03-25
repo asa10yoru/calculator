@@ -17,6 +17,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var out_note: UILabel!
     @IBOutlet weak var out_price: UILabel!
     
+    //フラグ
+    var onOff : Bool = true
+    
     //操作ボタン
     @IBAction func btn_back(sender: AnyObject) {
     }
@@ -82,6 +85,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: UITableViewDelegateプロトコルのメソッド
     // 各セルを選択した時に実行されるメソッド
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if onOff == true {
+            onOff = false
+        } else {
+            onOff = true
+        }
+        
     }
     
     // セルが削除が可能なことを伝えるメソッド
