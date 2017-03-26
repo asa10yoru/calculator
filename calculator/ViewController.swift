@@ -9,6 +9,15 @@
 import UIKit
 import RealmSwift
 
+extension String {
+    func chopPrefix(count: Int = 1) -> String {
+        return self.substringFromIndex(self.startIndex.advancedBy(count))
+    }
+    func chopSuffix(count: Int = 1) -> String {
+        return self.substringToIndex(self.endIndex.advancedBy(-count))
+    }
+}
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     //テキスト・ラベル
@@ -17,14 +26,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var in_price: UILabel!
     @IBOutlet weak var out_note: UILabel!
     @IBOutlet weak var out_price: UILabel!
+
  
     // Realmインスタンスを取得する
     let realm = try! Realm()
     // DB内のタスクが格納されるリスト。
     // 日付近い順\順でソート：降順
     // 以降内容をアップデートするとリスト内は自動的に更新される。
-//    let taskArray = try! Realm().objects(Task).sorted("in_note", ascending: false)
-    let taskArray = try! Realm().objects(Task)
+    var taskArray = try! Realm().objects(Task).sorted("id", ascending: false)
     
     //フラグなど
     var onOff : Bool = true
@@ -34,21 +43,48 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //操作ボタン
     @IBAction func btn_back(sender: AnyObject) {
-        
+ //        let myCount = String(myPrice).characters.count
+//        myPrice = String(myPrice).substringToIndex(myCount - 1)
+//        print(myCount)
+            in_price.text = in_price.text?.chopSuffix()
+        myPrice = Int(in_price.text!)!
+        print(myPrice)
     }
     @IBAction func btn_entry(sender: AnyObject) {
-        try! realm.write {
-            self.task.note = self.in_note.text!
-            self.task.price = self.in_price.text!
-            self.realm.add(self.task, update: true)
+            try! realm.write {
+                self.task = Task()
+                if ( self.in_note.text! != "" ) {
+                    self.task.note = self.in_note.text!
+                }
+                if ( self.in_price.text! != "" ) {
+                    self.task.price = self.in_price.text!
+                }
+ //               task.id = taskArray.max("id")! + 1
+                
+                               if ( taskArray.count > 0 ) {
+                    task.id = taskArray.max("id")! + 1
+                }
+                self.realm.add(self.task, update: true)
         }
+        taskArray = try! Realm().objects(Task).sorted("id", ascending: false)
         tableView.reloadData()
+        updateTotal()
     }
     @IBAction func btn_AC(sender: AnyObject) {
     }
     @IBAction func btn_x2(sender: AnyObject) {
     }
     @IBAction func btn_x3(sender: AnyObject) {
+    }
+    
+        func updateTotal() {
+            var totalprice = 0
+            for i in 0 ..< taskArray.count {
+                let task:Task = taskArray[i]
+                totalprice += Int(task.price)!
+            }
+            print(totalprice)
+            out_note.text = String.init(format: "%d", totalprice)
     }
     
     //数字ボタン
@@ -163,16 +199,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: UITableViewDataSourceプロトコルのメソッド
     // データの数（＝セルの数）を返すメソッド
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return taskArray.count
     }
     
     // 各セルの内容を返すメソッド
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        // 再利用可能な cell を得る
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        
-        return cell
-    }
+            // 再利用可能な cell を得る
+            let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+            
+            // Cellに値を設定する.
+            let task = taskArray[indexPath.row]
+            cell.textLabel?.text = task.note
+            cell.detailTextLabel?.text = task.price
+            
+            return cell
+        }
     
     // MARK: UITableViewDelegateプロトコルのメソッド
     // 各セルを選択した時に実行されるメソッド
