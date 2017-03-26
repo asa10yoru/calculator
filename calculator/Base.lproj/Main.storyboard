@@ -156,6 +156,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="96" height="57"/>
                                                 <color key="backgroundColor" red="0.72606909929999996" green="0.92285510110000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="４"/>
+                                                <connections>
+                                                    <action selector="btn_4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uxe-gp-04I"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6XF-QC-7fg">
                                                 <rect key="frame" x="96" y="0.0" width="96" height="57"/>
@@ -197,7 +200,6 @@
                                                 <state key="normal" title="１"/>
                                                 <connections>
                                                     <action selector="btn_1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="K62-9f-Z1m"/>
-                                                    <action selector="btn_4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h2A-Hj-1Pi"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lo9-8y-ixH">

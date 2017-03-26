@@ -13,17 +13,12 @@ class Task: Object {
     // 管理用 ID。プライマリーキー
     dynamic var id = 0
     
-    // カテゴリ
-    dynamic var category = ""
+    // 値段
+    dynamic var price = ""
     
-    // タイトル
-    dynamic var title = ""
+    // メモ
+    dynamic var note = ""
     
-    // 内容
-    dynamic var contents = ""
-    
-    /// 日時
-    dynamic var date = NSDate()
     
     /**
      id をプライマリーキーとして設定

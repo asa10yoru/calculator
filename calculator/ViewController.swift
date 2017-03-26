@@ -20,15 +20,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
  
     // Realmインスタンスを取得する
     let realm = try! Realm()
+    // DB内のタスクが格納されるリスト。
+    // 日付近い順\順でソート：降順
+    // 以降内容をアップデートするとリスト内は自動的に更新される。
+//    let taskArray = try! Realm().objects(Task).sorted("in_note", ascending: false)
+    let taskArray = try! Realm().objects(Task)
+    
     //フラグなど
     var onOff : Bool = true
+    var myPrice : Int = 0
     var total : Int = 0
     var task:Task!
     
     //操作ボタン
     @IBAction func btn_back(sender: AnyObject) {
+        
     }
     @IBAction func btn_entry(sender: AnyObject) {
+        try! realm.write {
+            self.task.note = self.in_note.text!
+            self.task.price = self.in_price.text!
+            self.realm.add(self.task, update: true)
+        }
         tableView.reloadData()
     }
     @IBAction func btn_AC(sender: AnyObject) {
@@ -40,84 +53,94 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //数字ボタン
     @IBAction func btn_0(sender: AnyObject) {
-        if total == 0 {
-            total = 0
+        if myPrice == 0 {
+            myPrice = 0
         } else {
-            total = (total * 10)
+            myPrice = (myPrice * 10)
         }
-        print(total)
+        in_price.text = String(myPrice)
+        print(myPrice)
     }
     @IBAction func btn_1(sender: AnyObject) {
-        if total == 0 {
-            total = 1
+        if myPrice == 0 {
+            myPrice = 1
         } else {
-            total = (total * 10) + 1
+            myPrice = (myPrice * 10) + 1
         }
-        print(total)
+        in_price.text = String(myPrice)
+        print(myPrice)
     }
     @IBAction func btn_2(sender: AnyObject) {
-        if total == 0 {
-            total = 2
+        if myPrice == 0 {
+            myPrice = 2
         } else {
-            total = (total * 10) + 2
+            myPrice = (myPrice * 10) + 2
         }
-        print(total)
+        in_price.text = String(myPrice)
+        print(myPrice)
     }
     @IBAction func btn_3(sender: AnyObject) {
-        if total == 0 {
-            total = 3
+        if myPrice == 0 {
+            myPrice = 3
         } else {
-            total = (total * 10) + 3
+            myPrice = (myPrice * 10) + 3
         }
-        print(total)
+        in_price.text = String(myPrice)
+        print(myPrice)
     }
     @IBAction func btn_4(sender: AnyObject) {
-        if total == 0 {
-            total = 4
+        if myPrice == 0 {
+            myPrice = 4
         } else {
-            total = (total * 10) + 4
+            myPrice = (myPrice * 10) + 4
         }
-        print(total)
+        in_price.text = String(myPrice)
+        print(myPrice)
     }
     @IBAction func btn_5(sender: AnyObject) {
-        if total == 0 {
-            total = 5
+        if myPrice == 0 {
+            myPrice = 5
         } else {
-            total = (total * 10) + 5
+            myPrice = (myPrice * 10) + 5
         }
-        print(total)
+        in_price.text = String(myPrice)
+        print(myPrice)
     }
     @IBAction func btn_6(sender: AnyObject) {
-        if total == 0 {
-            total = 6
+        if myPrice == 0 {
+            myPrice = 6
         } else {
-            total = (total * 10) + 6
+            myPrice = (myPrice * 10) + 6
         }
-        print(total)
+        in_price.text = String(myPrice)
+        print(myPrice)
     }
     @IBAction func btn_7(sender: AnyObject) {
-        if total == 0 {
-            total = 7
+        if myPrice == 0 {
+            myPrice = 7
         } else {
-            total = (total * 10) + 7
+            myPrice = (myPrice * 10) + 7
         }
-        print(total)
+        in_price.text = String(myPrice)
+        print(myPrice)
     }
     @IBAction func btn_8(sender: AnyObject) {
-        if total == 0 {
-            total = 8
+        if myPrice == 0 {
+            myPrice = 8
         } else {
-            total = (total * 10) + 8
+            myPrice = (myPrice * 10) + 8
         }
-        print(total)
+        in_price.text = String(myPrice)
+        print(myPrice)
     }
     @IBAction func btn_9(sender: AnyObject) {
-        if total == 0 {
-            total = 9
+        if myPrice == 0 {
+            myPrice = 9
         } else {
-            total = (total * 10) + 9
+            myPrice = (myPrice * 10) + 9
         }
-        print(total)
+        in_price.text = String(myPrice)
+        print(myPrice)
     }
     
     
@@ -128,6 +151,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view, typically from a nib.
         tableView.delegate = self
         tableView.dataSource = self
+        
+//        titleTextField.text = task.title
+//        contentsTextView.text = task.contents
     }
 
     override func didReceiveMemoryWarning() {
@@ -166,13 +192,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // Delete ボタンが押された時に呼ばれるメソッド
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // データベースから削除する
+        try! realm.write {
+            self.realm.delete(self.taskArray[indexPath.row])
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        }
     }
     
     func dismissKeyboard(){
         // キーボードを閉じる
         view.endEditing(true)
     }
-    
+
     
 }
 
